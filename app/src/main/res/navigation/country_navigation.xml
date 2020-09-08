@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/country_navigation"
+    app:startDestination="@id/listOfCountry">
+
+    <fragment
+        android:id="@+id/listOfCountry"
+        android:name="com.fatihb.countries.view.ListOfCountry"
+        android:label="fragment_list_of_country"
+        tools:layout="@layout/fragment_list_of_country" >
+        <action
+            android:id="@+id/action_listOfCountry_to_infoOfCountry"
+            app:destination="@id/infoOfCountry" />
+    </fragment>
+    <fragment
+        android:id="@+id/infoOfCountry"
+        android:name="com.fatihb.countries.view.InfoOfCountry"
+        android:label="fragment_info_of_country"
+        tools:layout="@layout/fragment_info_of_country" >
+        <action
+            android:id="@+id/action_infoOfCountry_to_listOfCountry"
+            app:destination="@id/listOfCountry" />
+        <argument
+            android:name="countryuid"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </fragment>
+</navigation>
