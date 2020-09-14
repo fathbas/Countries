@@ -1,11 +1,7 @@
 package com.fatihb.countries.view
 
-import android.app.Notification
-import android.app.NotificationChannel
-import android.app.NotificationManager
 import android.os.Bundle
 import android.view.*
-import androidx.core.view.isNotEmpty
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -13,17 +9,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.fatihb.countries.R
 import com.fatihb.countries.adapter.CountryAdapter
 import com.fatihb.countries.viewModel.ListViewModel
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_list_of_country.*
 
 class ListOfCountry : Fragment() {
 
     private lateinit var viewModel : ListViewModel
     private val countryAdapter = CountryAdapter(arrayListOf())
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,12 +40,7 @@ class ListOfCountry : Fragment() {
             viewModel.refreshFromApi()
             refreshLay.isRefreshing = false
         }
-
         observerLiveData()
-
-        
-
-
     }
 
     private fun observerLiveData(){

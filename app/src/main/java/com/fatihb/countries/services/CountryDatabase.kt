@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.fatihb.countries.model.Country
 
-@Database(entities = arrayOf(Country::class),version = 1)
+@Database(entities = [Country::class],version = 1)
 abstract class CountryDatabase : RoomDatabase() {
 
     abstract fun countryDao() : CountryDao
@@ -22,7 +22,6 @@ abstract class CountryDatabase : RoomDatabase() {
                 instance = it
             }
         }
-
 
         private fun makeDatabase(context: Context) = Room.databaseBuilder(
             context.applicationContext,CountryDatabase::class.java,"countrydatabase"

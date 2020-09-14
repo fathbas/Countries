@@ -9,15 +9,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.fatihb.countries.R
 import com.fatihb.countries.databinding.ItemCountryBinding
 import com.fatihb.countries.model.Country
-import com.fatihb.countries.util.downFromUrl
-import com.fatihb.countries.util.placeHolderProgressBar
 import com.fatihb.countries.view.ListOfCountryDirections
 import kotlinx.android.synthetic.main.item_country.view.*
 
-class CountryAdapter(val countryList: ArrayList<Country>): RecyclerView.Adapter<CountryAdapter.CountryViewHolder>(),CountryClick {
-    class CountryViewHolder(var view: ItemCountryBinding) : RecyclerView.ViewHolder(view.root) {
-
-    }
+class CountryAdapter(private val countryList: ArrayList<Country>): RecyclerView.Adapter<CountryAdapter.CountryViewHolder>(),CountryClick {
+    class CountryViewHolder(var view: ItemCountryBinding) : RecyclerView.ViewHolder(view.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CountryViewHolder {
         val inflater = LayoutInflater.from(parent.context)

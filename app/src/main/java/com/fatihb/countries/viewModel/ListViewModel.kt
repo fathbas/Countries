@@ -1,23 +1,20 @@
 package com.fatihb.countries.viewModel
 
 import android.app.Application
-import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.fatihb.countries.model.Country
 import com.fatihb.countries.services.CountryApiService
 import com.fatihb.countries.services.CountryDatabase
 import com.fatihb.countries.util.CustomSharedPreferences
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.disposables.Disposable
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.launch
 
 class ListViewModel(application: Application) : BaseViewModel(application) {
 
-    private val countryApıService = CountryApiService()
+    private val countryApiService = CountryApiService()
     private val disposable = CompositeDisposable()
     private var customPreferences = CustomSharedPreferences(getApplication())
     private var refreshTime = 10*60*1000*1000*1000L
@@ -51,23 +48,20 @@ class ListViewModel(application: Application) : BaseViewModel(application) {
         countryLoading.value = true
 
         disposable.add(
-            countryApıService.getData()
+            countryApiService.getData()
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(object : DisposableSingleObserver<List<Country>>(){
                     override fun onSuccess(t: List<Country>) {
-                        storeInSqlite(t)
+                        storeInSQLite(t)
                     }
-
                     override fun onError(e: Throwable) {
                         countryLoading.value=false
                         countryError.value=true
                         e.printStackTrace()
                     }
-
                 })
         )
-
     }
 
     private fun showCountries(countryList : List<Country>){
@@ -76,7 +70,7 @@ class ListViewModel(application: Application) : BaseViewModel(application) {
         countryLoading.value=false
     }
 
-    private fun storeInSqlite(list:List<Country>){
+    private fun storeInSQLite(list:List<Country>){
         launch {
             val dao = CountryDatabase(getApplication()).countryDao()
             dao.deleteAllCountries()
@@ -85,7 +79,6 @@ class ListViewModel(application: Application) : BaseViewModel(application) {
             for (i in list.indices){
                 list[i].uuid = listLong[i].toInt()
             }
-
             showCountries(list)
         }
         customPreferences.saveTime(System.nanoTime())

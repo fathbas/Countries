@@ -8,9 +8,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class CountryApiService {
 
-    private val Base_Url = "https://raw.githubusercontent.com/"
+    private val baseUrl = "https://raw.githubusercontent.com/"
     private val api = Retrofit.Builder()
-        .baseUrl(Base_Url)
+        .baseUrl(baseUrl)
         .addConverterFactory(GsonConverterFactory.create())
         .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
         .build()

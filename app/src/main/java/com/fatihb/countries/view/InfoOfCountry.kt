@@ -1,20 +1,16 @@
 package com.fatihb.countries.view
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.fatihb.countries.R
 import com.fatihb.countries.databinding.FragmentInfoOfCountryBinding
-import com.fatihb.countries.util.downFromUrl
-import com.fatihb.countries.util.placeHolderProgressBar
 import com.fatihb.countries.viewModel.InfoViewModel
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.fragment_info_of_country.*
 
 
 class InfoOfCountry : Fragment() {
@@ -22,10 +18,6 @@ class InfoOfCountry : Fragment() {
     private lateinit var viewModel: InfoViewModel
     private var counUId = 0
     private lateinit var dataBinding : FragmentInfoOfCountryBinding
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,19 +31,13 @@ class InfoOfCountry : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-
         arguments?.let {
             counUId = InfoOfCountryArgs.fromBundle(
                 it
             ).countryuid
         }
-
         viewModel = ViewModelProviders.of(this).get(InfoViewModel::class.java)
         viewModel.getDataFromRoom(counUId)
-
-
-
         observeLiveData()
     }
 
